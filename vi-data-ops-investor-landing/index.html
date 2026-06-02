@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vi Data Ops Agent - Investor Landing</title>
+    <meta
+      name="description"
+      content="A polished investor and executive landing page for the Vi Data Ops Agent: local-first pharma audience operations with analytics, contextual Copilot, governed runs, admin access controls, runtime settings, and validated deliverables."
+    />
+    <link rel="icon" type="image/png" href="assets/vi-logo-black.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-nav" aria-label="Primary">
+      <a class="brand" href="#top" aria-label="Vi Data Ops Agent home">
+        <img src="assets/vi-logo-white.png" alt="Vi" />
+        <span>
+          <strong>Vi Data Ops</strong>
+          <small>Agent platform</small>
+        </span>
+      </a>
+      <nav>
+        <a href="#tracks">Tracks</a>
+        <a href="#latest">Latest</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#agents">Agents</a>
+        <a href="#proof">Proof</a>
+        <a href="#controls">Controls</a>
+      </nav>
+      <a class="nav-cta" href="#briefing">Open the briefing</a>
+    </header>
+    <div class="scroll-progress" aria-hidden="true">
+      <span id="scroll-progress-bar"></span>
+    </div>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <canvas id="hero-network" aria-hidden="true"></canvas>
+        <div class="hero-media" aria-hidden="true">
+          <img src="assets/product-dashboard.png" alt="" />
+          <div class="scan-line"></div>
+        </div>
+
+        <div class="hero-copy">
+          <h1 id="hero-title">Vi Data Ops Agent</h1>
+          <p class="hero-lede">
+            A local-first, authenticated operations cockpit that turns pharma
+            audience data work into traceable runs, contextual operator
+            guidance, two-audience analytics, audience-aware build groups,
+            runtime model and sharing controls, validated outputs, and reusable
+            learning.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#briefing">Why it matters</a>
+            <a class="btn secondary" href="#architecture">How it works</a>
+          </div>
+          <dl class="hero-metrics" aria-label="Current workspace signals">
+            <div>
+              <dt data-count="69">0</dt>
+              <dd>recorded runs</dd>
+            </div>
+            <div>
+              <dt data-count="31">0</dt>
+              <dd>client profiles</dd>
+            </div>
+            <div>
+              <dt data-count="3">0</dt>
+              <dd>independent tracks</dd>
+            </div>
+            <div>
+              <dt data-count="2">0</dt>
+              <dd>analytics audiences</dd>
+            </div>
+          </dl>
+        </div>
+
+        <a class="scroll-cue" href="#briefing" aria-label="Continue to briefing">
+          <span></span>
+          Briefing
+        </a>
+      </section>
+
+      <section id="briefing" class="section briefing reveal" aria-labelledby="briefing-title">
+        <div class="section-head">
+          <h2 id="briefing-title">One system, read at any altitude.</h2>
+          <p>
+            The operating value is legible without a technical background, and the
+            system boundaries hold up to close inspection. The same surface rewards
+            whatever depth a reader brings to it.
+          </p>
+        </div>
+
+        <div class="briefing-grid">
+          <article class="briefing-panel is-active" data-brief-panel="executive">
+            <h3>What changes on the floor</h3>
+            <p>
+              Fragile handoffs go away. Files go in, the system shows exactly where
+              they were routed, run health stays visible, risky changes wait for a
+              human yes, multi-audience work splits cleanly, admins can open or
+              close sharing, and every session ends with concrete deliverables.
+            </p>
+            <ul>
+              <li>Clear status for every client and pipeline.</li>
+              <li>Decision gates keep human judgment in the loop.</li>
+              <li>Analytics separate internal operations from partner-facing proof.</li>
+            </ul>
+          </article>
+          <article class="briefing-panel" data-brief-panel="investor">
+            <h3>Where it compounds</h3>
+            <p>
+              The wedge is operational AI with compliance-aware workflow design:
+              deterministic processing, agent reasoning only where judgment is
+              valuable, and telemetry from run health, approvals, audience policy
+              gates, and deliverable history.
+            </p>
+            <ul>
+              <li>Expands from a local cockpit toward managed enterprise workflow.</li>
+              <li>Compounds with client history and cross-client patterns.</li>
+              <li>Anchored in painful, recurring pharma data operations.</li>
+            </ul>
+          </article>
+          <article class="briefing-panel" data-brief-panel="engineer">
+            <h3>How it actually works</h3>
+            <p>
+              A React/Vite console talks to a Fastify control server, a SQLite run
+              registry, live event streams, Zod-backed OpenAPI, typed analytics
+              endpoints, MCP tools, Python analysis, and track-specific agent
+              runners whose output is critiqued and corrected before it ships.
+            </p>
+            <ul>
+              <li>The run registry is the shared source of truth.</li>
+              <li>Typed MCP tools expose the parse, validate, QA, build, and knowledge actions.</li>
+              <li>Each track owns its own inputs, outputs, and validation rules.</li>
+              <li>Multi-audience fan-out is tracked with a shared run_group_id.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section narrative reveal" aria-labelledby="narrative-title">
+        <div class="section-head compact">
+          <h2 id="narrative-title">From messy inputs to governed delivery.</h2>
+          <p>
+            The app is the operating layer between raw pharma audience data and
+            client-ready artifacts.
+          </p>
+        </div>
+
+        <div class="flow-map" id="flow-map" aria-label="Product flow">
+          <div class="flow-track" aria-hidden="true"><span class="flow-track-fill" id="flow-track-fill"></span></div>
+          <article class="flow-step is-active" data-flow-node data-engine="det">
+            <span class="flow-index">01</span>
+            <span class="flow-engine">Deterministic</span>
+            <h3>Upload</h3>
+            <p>Files, folders, zips, briefs, audit bundles, CSV specs, JSON configs, and optional LI files land in one operator-facing router.</p>
+            <ul>
+              <li>Audit CSV/HTML folders</li>
+              <li>Claims CSV + JSON pairs</li>
+              <li>Client Brief XLSX uploads</li>
+            </ul>
+          </article>
+          <article class="flow-step" data-flow-node data-engine="det">
+            <span class="flow-index">02</span>
+            <span class="flow-engine">Deterministic</span>
+            <h3>Resolve</h3>
+            <p>The router classifies track, client, file kind, audience shape, and ambiguity, then makes "Routed to: client" impossible to miss.</p>
+            <ul>
+              <li>Client + track confidence</li>
+              <li>Audience kind declaration</li>
+              <li>No CSV = No QA guardrail</li>
+            </ul>
+          </article>
+          <article class="flow-step" data-flow-node data-engine="agent">
+            <span class="flow-index">03</span>
+            <span class="flow-engine">Agent + tools</span>
+            <h3>Run</h3>
+            <p>The dispatcher advances stages, streams events, and fans out multi-audience Search Insights into grouped terminal runs.</p>
+            <ul>
+              <li>Intent, Claims, Search runners</li>
+              <li>SSE stage events</li>
+              <li>Re-run from Run Detail</li>
+            </ul>
+          </article>
+          <article class="flow-step" data-flow-node data-engine="human">
+            <span class="flow-index">04</span>
+            <span class="flow-engine">Human in the loop</span>
+            <h3>Decide</h3>
+            <p>Decision gates, readiness badges, audience policy badges, and context-aware Copilot keep review grounded in the current screen.</p>
+            <ul>
+              <li>Ready / review / blocked</li>
+              <li>Patch vs supersede history</li>
+              <li>Route-aware Copilot answers</li>
+            </ul>
+          </article>
+          <article class="flow-step" data-flow-node data-engine="det">
+            <span class="flow-index">05</span>
+            <span class="flow-engine">Deterministic</span>
+            <h3>Deliver</h3>
+            <p>Validated workbooks, fixed JSON, payer artifacts, summaries, correction history, and analytics rollups land in the right domain.</p>
+            <ul>
+              <li>5-sheet SI workbooks</li>
+              <li>Diff XLSX + QA summary</li>
+              <li>Reusable client learning</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="latest" class="section latest reveal" aria-labelledby="latest-title">
+        <div class="section-head">
+          <h2 id="latest-title">Latest build: shared, secured, configurable, and self-correcting.</h2>
+          <p>
+            On top of an already audience-aware cockpit &mdash; analytics, safer
+            routing, re-runs, correction history, multi-audience fan-out, and
+            policy gates &mdash; the recent work made it usable by a team without
+            losing control: real multi-user access, a one-switch private mode,
+            authenticated downloads, runtime model/auth settings, LAN-sharing
+            readouts, and agents that review and correct their own output before
+            delivery.
+          </p>
+        </div>
+
+        <div class="release-grid">
+          <article>
+            <span>01</span>
+            <h3>Two-audience Analytics</h3>
+            <p>Product Ops gets run health, stage duration, failure modes, per-client frequency, and deliverables shipped. CP View gets approval rates by client and action type.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Contextual Copilot</h3>
+            <p>Chat messages carry current route, run id, client id, and operator id, so questions like "why did this fail?" resolve against the visible surface.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Search Insights preview</h3>
+            <p>The Client Brief path now parses first and previews client, brand, audiences, keywords, LI buckets, KOLs, competitors, and parser warnings before the agent build starts.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Multi-audience fan-out</h3>
+            <p>Brief and thin-JSON paths expose a BuildGroupTable and combo picker, then launch one grouped run per audience set with a shared run_group_id.</p>
+          </article>
+          <article>
+            <span>05</span>
+            <h3>Audience policy gates</h3>
+            <p>Patient, caregiver, and HCP audiences now drive allowed deliverables: Claims QA, eligibility/payer JSON, or no claims artifact at all.</p>
+          </article>
+          <article>
+            <span>06</span>
+            <h3>Claims QA goes real</h3>
+            <p>The demo-only path was replaced with multipart CSV/JSON dispatch, payer modes, and the standing rule that No CSV means No QA.</p>
+          </article>
+          <article>
+            <span>07</span>
+            <h3>Readiness and re-run</h3>
+            <p>Run Detail now shows Ready to send, Needs review, or Blocked, plus a real re-run endpoint for terminal runs.</p>
+          </article>
+          <article>
+            <span>08</span>
+            <h3>Client corrections</h3>
+            <p>Client Detail surfaces correction history from diff.json files, including patch versus supersede, add/remove counts, and pending decision-capture flags.</p>
+          </article>
+          <article>
+            <span>09</span>
+            <h3>Typed API surface</h3>
+            <p>Fastify routes now use Zod validation, generated OpenAPI, canonical shared enums, and event-kind guards to reduce UI/backend drift.</p>
+          </article>
+          <article>
+            <span>10</span>
+            <h3>Cleaner operating system</h3>
+            <p>Dormant tools and Confluence infrastructure were removed, duplicate client folders merged, and operator-facing upload paths were documented as first-class.</p>
+          </article>
+          <article>
+            <span>11</span>
+            <h3>Multi-user access</h3>
+            <p>Username/password login replaced the single shared token: scrypt-hashed credentials, session tokens, admin-managed accounts and roles, and a one-switch private mode that instantly returns the workspace to admin-only.</p>
+          </article>
+          <article>
+            <span>12</span>
+            <h3>Self-correcting agents</h3>
+            <p>A validation critic now reviews each maker's output before delivery and re-dispatches it with the critique when a check fails &mdash; a bounded self-correction loop &mdash; while each agent's model tier is resolved from the auth context.</p>
+          </article>
+          <article>
+            <span>13</span>
+            <h3>Settings control plane</h3>
+            <p>Settings now exposes the live model tier, auth source, effective model map, backend health probe, SSE state, LAN sharing URL, output paths, and hidden-client recovery.</p>
+          </article>
+          <article>
+            <span>14</span>
+            <h3>Admin user controls</h3>
+            <p>The Users surface manages account creation, roles, password resets, enable/disable, deletion guards, and the shared/private workspace switch.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="tracks" class="section tracks reveal" aria-labelledby="tracks-title">
+        <div class="section-head">
+          <h2 id="tracks-title">Three independent business tracks.</h2>
+          <p>
+            The product respects the shape of Vi's work: web-intent optimization,
+            claims audience QA, and new-client Search Insights never share data
+            or assumptions.
+          </p>
+        </div>
+
+        <div class="track-grid">
+          <article class="track-card">
+            <div class="track-icon intent"></div>
+            <h3>Intent Audit Optimization</h3>
+            <p>
+              Parses audit CSV and HTML folders, asks one analyst agent to reason
+              over pre-parsed context, validates the analysis, then finalizes an
+              optimization workbook.
+            </p>
+            <dl>
+              <div><dt>Inputs</dt><dd>Audit folders, keywords, URL quality, agent text.</dd></div>
+              <div><dt>Outputs</dt><dd>Optimization XLSX, JSON analysis, summary, change log.</dd></div>
+            </dl>
+          </article>
+          <article class="track-card">
+            <div class="track-icon claims"></div>
+            <h3>Claims QA</h3>
+            <p>
+              Compares CSV source-of-truth rules against claims JSON, builds
+              fixed configs, produces diff workbooks, supports payer modes, and
+              now dispatches real uploaded files instead of demo stages.
+            </p>
+            <dl>
+              <div><dt>Inputs</dt><dd>CSV rule spec plus JSON audience config.</dd></div>
+              <div><dt>Outputs</dt><dd>Fixed JSON, diff XLSX, payer report, QA summary.</dd></div>
+              <div><dt>Guardrail</dt><dd>No CSV = No QA; caregiver and HCP audiences follow policy gates.</dd></div>
+            </dl>
+          </article>
+          <article class="track-card">
+            <div class="track-icon search"></div>
+            <h3>Search Insights Builder</h3>
+            <p>
+              Turns a client brief, existing profile, or thin JSON into a complete
+              activation workbook with overview, keywords, URLs, agent text, and
+              claims sheet. Brief uploads now get parser preview, audience combo
+              selection, and grouped fan-out before build.
+            </p>
+            <dl>
+              <div><dt>Inputs</dt><dd>Client brief XLSX, leading indicators, or profile JSON.</dd></div>
+              <div><dt>Outputs</dt><dd>One or more 5-sheet workbooks plus source sub-files and group manifest.</dd></div>
+            </dl>
+          </article>
+        </div>
+      </section>
+
+      <section id="architecture" class="section architecture reveal" aria-labelledby="architecture-title">
+        <div class="section-head compact">
+          <h2 id="architecture-title">Architecture that separates judgment from mechanics.</h2>
+          <p>
+            Deterministic scripts do parsing, validation, and assembly. Agents
+            handle the parts that require judgment, context, or language. Hover or
+            tap a node to trace its data paths through the live system.
+          </p>
+        </div>
+
+        <div class="architecture-wrap">
+          <div class="topology" id="topology" aria-label="Interactive system architecture diagram">
+            <svg class="topo-links" id="topo-links" aria-hidden="true" preserveAspectRatio="none"></svg>
+
+            <div class="topo-flow-banner" aria-hidden="true">
+              <span class="topo-flow-dot"></span>
+              <span id="topo-flow-label">Tracing data flow across four layers</span>
+            </div>
+
+            <div class="topo-grid" id="topo-grid">
+              <div class="topo-col" data-layer="interface">
+                <span class="topo-col-head">Interface</span>
+                <button class="topo-node" data-node="ui" data-detail="The React/Vite operator console renders the dashboard, the Search Insights wizard, Run Detail, Analytics, the System graph, and admin user management. It subscribes to the event stream so state never lies about progress.">
+                  <span class="topo-tag">UI</span>
+                  React / Vite console
+                  <small>dashboard · wizards · admin</small>
+                </button>
+                <button class="topo-node" data-node="upload" data-detail="A deterministic intake router ingests files, folders, zips, briefs, audit bundles, CSV specs, and JSON configs, resolves track, client, file kind, and audience shape, dedupes by content hash, and hard-links into the canonical input tree before anything runs.">
+                  <span class="topo-tag">IN</span>
+                  Upload router
+                  <small>classify · dedupe · route</small>
+                </button>
+                <button class="topo-node" data-node="copilot" data-detail="One orchestrator chat agent serving two intents, auto-routed: Ask answers read-only questions about runs, deliverables, and cross-client analytics by citing the system&rsquo;s own data; Go dispatches runs confirm-first. Scoped to the current route, run, client, and operator.">
+                  <span class="topo-tag">AI</span>
+                  Orchestrator Copilot
+                  <small>ask · go (confirm-first)</small>
+                </button>
+              </div>
+
+              <div class="topo-col" data-layer="control">
+                <span class="topo-col-head">Control plane</span>
+                <button class="topo-node" data-node="api" data-detail="A Fastify control server with Zod-backed request/response validation, generated OpenAPI, canonical shared enums, and event-kind guards to keep the UI, server, and tests from drifting apart.">
+                  <span class="topo-tag">API</span>
+                  Fastify control API
+                  <small>Zod · OpenAPI · enums</small>
+                </button>
+                <button class="topo-node" data-node="auth" data-detail="Multi-user access: username/password login with scrypt-hashed credentials, opaque session tokens, admin-managed accounts and roles, and a one-switch private mode that instantly drops the workspace back to admin-only when sharing should stop.">
+                  <span class="topo-tag">SEC</span>
+                  Auth &amp; sessions
+                  <small>roles · private-mode switch</small>
+                </button>
+                <button class="topo-node" data-node="sse" data-detail="A Server-Sent Events stream pushes real stage transitions, logs, and errors to the cockpit as runs advance &mdash; no invented progress bars.">
+                  <span class="topo-tag">SSE</span>
+                  Live event stream
+                  <small>stage events · logs</small>
+                </button>
+                <button class="topo-node" data-node="dispatcher" data-detail="The dispatcher advances each track&rsquo;s stages, races stage work against a watchdog and timeout so a hung run never wedges the queue, and fans multi-audience Search Insights out into grouped terminal runs under one shared run_group_id.">
+                  <span class="topo-tag">ORC</span>
+                  Dispatcher
+                  <small>stages · fan-out · watchdog</small>
+                </button>
+                <button class="topo-node" data-node="registry" data-detail="A SQLite run registry is the shared source of truth: runs, stages, decision gates, captured decisions, payload summaries, artifacts, per-model usage, and run_group_id clusters. An append-only event log is the truth-of-record for replay.">
+                  <span class="topo-tag">DB</span>
+                  SQLite run registry
+                  <small>runs · gates · decisions</small>
+                </button>
+              </div>
+
+              <div class="topo-col" data-layer="execution">
+                <span class="topo-col-head">Agents &amp; engines</span>
+                <button class="topo-node" data-node="runners" data-detail="Track-specific runners for Intent Audit, Claims QA, and Search Insights isolate every Agent SDK call. Each track owns its inputs, outputs, and validation rules and never shares assumptions across tracks.">
+                  <span class="topo-tag">RUN</span>
+                  Track runners
+                  <small>intent · claims · SI</small>
+                </button>
+                <button class="topo-node" data-node="makers" data-detail="The reasoning agents that produce work: an audit analyst, a Search Insights builder, a Claims QA agent, a client-brief parser, and a lightweight upload classifier. Each agent&rsquo;s model tier is resolved from the auth context &mdash; heavier reasoning where judgment pays, cheap classifiers where it doesn&rsquo;t.">
+                  <span class="topo-tag">AGT</span>
+                  Maker agents
+                  <small>analyst · builder · QA · parser</small>
+                </button>
+                <button class="topo-node" data-node="classify" data-detail="A classification engine places each client in a closed seven-category taxonomy from weighted signals &mdash; orphan ICD codes, drug brands, lexicon hits &mdash; pinned by golden-fixture tests so a lexicon edit can&rsquo;t silently re-classify existing clients. An operator override always wins.">
+                  <span class="topo-tag">CLS</span>
+                  Classification engine
+                  <small>7-category · signals</small>
+                </button>
+                <button class="topo-node" data-node="critic" data-detail="A generalized validation critic reviews each maker&rsquo;s output before delivery. A failed verdict re-dispatches the same maker inline with the critique appended &mdash; a bounded self-correction loop &mdash; while a stagnation guard stops a maker that isn&rsquo;t converging.">
+                  <span class="topo-tag">CRT</span>
+                  Validation critic
+                  <small>self-correction loop</small>
+                </button>
+                <button class="topo-node" data-node="mcp" data-detail="Typed, test-backed MCP tools expose the deterministic mechanics the agents call into: parse, validate, finalize, Claims QA, Search Insights build, and the read-only knowledge and insights queries.">
+                  <span class="topo-tag">MCP</span>
+                  MCP tool layer
+                  <small>parse · validate · build</small>
+                </button>
+                <button class="topo-node" data-node="quality" data-detail="A consolidated quality gate runs before a run is allowed to finish: it reconciles cross-reader consistency and confirms every expected artifact exists and is well-formed &mdash; the old separate cross-validation and health-monitor phases, folded into one deterministic check.">
+                  <span class="topo-tag">QG</span>
+                  Quality gate
+                  <small>consistency · completeness</small>
+                </button>
+                <button class="topo-node" data-node="analysis" data-detail="Python analysis modules handle trends, anomalies, clustering, prediction, cross-client similarity, and workbook assembly &mdash; the heavy quality work that stays deterministic and reproducible.">
+                  <span class="topo-tag">PY</span>
+                  Python analysis
+                  <small>stats · workbooks</small>
+                </button>
+              </div>
+
+              <div class="topo-col" data-layer="delivery">
+                <span class="topo-col-head">Delivery &amp; learning</span>
+                <button class="topo-node is-terminal" data-node="outputs" data-detail="Validated workbooks, fixed JSON, payer artifacts, diff XLSX, summaries, change logs, and group manifests land in the right client domain inside a structured Outputs tree. Deliverables download over authenticated requests, not open links.">
+                  <span class="topo-tag">OUT</span>
+                  Outputs tree
+                  <small>XLSX · JSON · MD · logs</small>
+                </button>
+                <button class="topo-node" data-node="analytics" data-detail="Two-audience analytics roll up the registry: an internal operations view gets run health, stage latency, failure modes, and shipped deliverables; a partner-facing view gets approval rates by client and action type.">
+                  <span class="topo-tag">BI</span>
+                  Analytics views
+                  <small>internal · partner-facing</small>
+                </button>
+                <button class="topo-node" data-node="learning" data-detail="Corrections, keyword outcomes, and recurring cross-client patterns accrue into a pattern registry that later runs read from &mdash; the part of the system that compounds with every client and every operator decision.">
+                  <span class="topo-tag">LRN</span>
+                  Cross-client learning
+                  <small>patterns · outcomes</small>
+                </button>
+                <button class="topo-node" data-node="curator" data-detail="A knowledge-curator agent maintains the learning base: it prunes stale patterns, reconciles the critic&rsquo;s calibration signal, and drafts standing-rule changes as proposals for review &mdash; it never auto-applies a rule. A separate conflict detector flags docs and rules that drift from the running code.">
+                  <span class="topo-tag">KB</span>
+                  Knowledge curator
+                  <small>prune · calibrate · propose</small>
+                </button>
+                <button class="topo-node" data-node="decisions" data-detail="Operator gate decisions are captured and distilled into reusable, generalizable patterns &mdash; proposed for review, never auto-applied &mdash; so human judgment becomes durable institutional memory instead of a one-off click.">
+                  <span class="topo-tag">DEC</span>
+                  Decision capture
+                  <small>judgment &rarr; memory</small>
+                </button>
+              </div>
+            </div>
+
+            <div class="topo-legend" aria-hidden="true">
+              <span><i class="dot deterministic"></i>Deterministic</span>
+              <span><i class="dot agentic"></i>Agent judgment</span>
+              <span><i class="dot store"></i>State of record</span>
+              <span><i class="line"></i>Live data path</span>
+            </div>
+          </div>
+
+          <div class="architecture-copy">
+            <div class="topo-detail" id="topo-detail" aria-live="polite">
+              <span class="topo-detail-kicker">System detail</span>
+              <h3 id="topo-detail-title">A live multi-agent system, one source of truth</h3>
+              <p id="topo-detail-body">
+                Hover or tap any node to trace exactly which subsystems it talks to.
+                Every path here is a real boundary in the codebase &mdash; the run
+                registry sits at the center, deterministic mechanics stay reproducible,
+                and judgment-heavy work is fenced inside agents that critique and
+                correct each other before anything is delivered.
+              </p>
+            </div>
+            <h3 class="check-head">What holds up under close inspection</h3>
+            <ul class="check-list">
+              <li>A shared registry records every run, stage, gate, decision, log, and artifact; an append-only event log replays it.</li>
+              <li>Reasoning agents are isolated per track; each maker&rsquo;s output passes a validation critic, with a bounded self-correction loop on failure.</li>
+              <li>A consolidated quality gate checks cross-reader consistency and artifact completeness before a run can finish.</li>
+              <li>Model tier is resolved from the auth context &mdash; heavier reasoning where judgment pays, cheap classifiers where it does not.</li>
+              <li>Deterministic tools are typed and test-backed: parse, validate, finalize, QA, build, knowledge.</li>
+              <li>Live events keep the cockpit honest &mdash; real stage transitions, never invented progress.</li>
+              <li>Zod-backed OpenAPI and shared enums keep UI, server, and tests aligned.</li>
+              <li>Multi-user access with roles and a one-switch private mode, and authenticated deliverable downloads.</li>
+              <li>Corrections and cross-client patterns compound into a registry that future runs read from.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="agents" class="section roster-section reveal" aria-labelledby="roster-title">
+        <div class="section-head">
+          <h2 id="roster-title">Judgment where it changes the outcome; mechanics everywhere else.</h2>
+          <p>
+            Reasoning is spent only where it moves the result. Everything that can
+            be deterministic stays deterministic, typed, and reproducible &mdash; the
+            system is auditable, not a black box.
+          </p>
+        </div>
+        <div class="roster">
+          <article class="roster-col">
+            <h3>Reasoning agents</h3>
+            <ul>
+              <li><strong>Orchestrator</strong> &mdash; answers from the system&rsquo;s own data and dispatches runs only after an explicit confirmation.</li>
+              <li><strong>Audit analyst</strong> &mdash; reasons over pre-parsed audit context and proposes optimizations.</li>
+              <li><strong>Search Insights builder</strong> &mdash; turns a brief or profile into a five-sheet activation workbook.</li>
+              <li><strong>Claims QA</strong> &mdash; reconciles a JSON audience config against the CSV source-of-truth.</li>
+              <li><strong>Client-brief parser</strong> &mdash; extracts brand, codes, audiences, indicators, and KOLs from a brief.</li>
+              <li><strong>Upload classifier</strong> &mdash; resolves track, client, and audience from messy uploads on a lightweight tier.</li>
+              <li><strong>Client classifier</strong> &mdash; places each client in a seven-category taxonomy from weighted signals, pinned by golden fixtures.</li>
+              <li><strong>Agent-text QA</strong> &mdash; scores agent text against eight standards before it reaches a partner.</li>
+              <li><strong>Validation critic</strong> &mdash; reviews every maker&rsquo;s output and drives the bounded self-correction loop.</li>
+              <li><strong>Knowledge curator</strong> &mdash; prunes stale patterns, calibrates, and proposes standing-rule changes for review.</li>
+              <li><strong>Conflict detector</strong> &mdash; flags documentation and rules that no longer match the running code.</li>
+              <li><strong>Decision capture</strong> &mdash; distills operator gate decisions into reusable institutional memory.</li>
+            </ul>
+          </article>
+          <article class="roster-col">
+            <h3>Deterministic engines</h3>
+            <ul>
+              <li><strong>Parse &rarr; validate &rarr; finalize</strong> &mdash; the optimization pipeline; agents think only in the middle.</li>
+              <li><strong>Quality gate</strong> &mdash; one check for cross-reader consistency and artifact completeness before a run can finish.</li>
+              <li><strong>Workbook builders</strong> &mdash; the four- and five-sheet Excel templates, reproducible byte-for-byte.</li>
+              <li><strong>Schema validators</strong> &mdash; shared typed contracts that fail loud instead of drifting.</li>
+              <li><strong>Pattern extractor</strong> &mdash; the learning sink that turns runs and corrections into reusable patterns.</li>
+              <li><strong>Analysis engine</strong> &mdash; trends, anomalies, clustering, prediction, and cross-client similarity.</li>
+              <li><strong>Dispatcher &amp; watchdog</strong> &mdash; advances stages, fans out grouped runs, and recovers hung work.</li>
+              <li><strong>Upload router</strong> &mdash; classify, dedupe by content hash, and hard-link into the canonical input tree.</li>
+              <li><strong>MCP server &amp; dashboard</strong> &mdash; typed, test-backed tools plus a separate embedded health surface.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="proof" class="section proof reveal" aria-labelledby="proof-title">
+        <div class="section-head">
+          <h2 id="proof-title">Real product surfaces, not a mock deck.</h2>
+          <p>
+            These screenshots come from the running local app with chat collapsed:
+            login, dashboard, analytics, the real Search Insights wizard, Run
+            Detail, upload routing, the live system graph, expanded Settings,
+            and the admin Users panel.
+          </p>
+        </div>
+
+        <div class="showcase">
+          <div class="showcase-tabs" role="tablist" aria-label="Product screenshots">
+            <button data-shot="login">Login</button>
+            <button class="is-active" data-shot="dashboard">Dashboard</button>
+            <button data-shot="analytics">Analytics</button>
+            <button data-shot="search">Search Insights</button>
+            <button data-shot="run">Run Detail</button>
+            <button data-shot="upload">Upload</button>
+            <button data-shot="system">System</button>
+            <button data-shot="settings">Settings</button>
+            <button data-shot="users">Users</button>
+          </div>
+          <figure class="shot-frame">
+            <img
+              id="showcase-image"
+              src="assets/product-dashboard.png"
+              alt="Vi Data Ops dashboard with run metrics, next best action, track mix, and collapsed chat."
+            />
+            <figcaption id="showcase-caption">
+              Dashboard: run metrics, Next Best Action, approval trends, track mix, and collapsed chat in one operator console.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="controls" class="section controls reveal" aria-labelledby="controls-title">
+        <div class="section-head compact">
+          <h2 id="controls-title">Guardrails are part of the product.</h2>
+          <p>
+            The system is designed for a regulated, high-stakes operating context:
+            it does not hide uncertainty behind automation.
+          </p>
+        </div>
+
+        <div class="control-grid">
+          <article>
+            <h3>Track isolation</h3>
+            <p>Intent, Claims QA, and Search Insights have separate inputs, outputs, skills, and validation logic.</p>
+          </article>
+          <article>
+            <h3>Decision gates</h3>
+            <p>Analyst recommendations pause before delivery so operators approve or reject high-impact changes.</p>
+          </article>
+          <article>
+            <h3>Audience policy gate</h3>
+            <p>Patients can receive Claims QA, caregivers receive eligibility/payer deliverables, and HCP audiences are blocked from claims artifacts.</p>
+          </article>
+          <article>
+            <h3>Readiness badge</h3>
+            <p>Run Detail tells operators whether a completed run is Ready to send, Needs review, or Blocked.</p>
+          </article>
+          <article>
+            <h3>No CSV = No QA</h3>
+            <p>Claims QA cannot proceed without a CSV source-of-truth, even when JSON or payer files are present.</p>
+          </article>
+          <article>
+            <h3>Routed upload banner</h3>
+            <p>Confident upload classifications begin with a high-visibility routed-client banner and re-upload affordance.</p>
+          </article>
+          <article>
+            <h3>Traceable runs</h3>
+            <p>Every run has stage history, events, errors, payload summaries, artifacts, and rerun affordances.</p>
+          </article>
+          <article>
+            <h3>Corrections history</h3>
+            <p>Client Detail exposes prior corrections, patch versus supersede status, and pending decision-capture work.</p>
+          </article>
+          <article>
+            <h3>Typed contracts</h3>
+            <p>Zod schemas, generated OpenAPI, and canonical shared enums reduce silent drift between server, UI, and tests.</p>
+          </article>
+          <article>
+            <h3>Contextual Copilot</h3>
+            <p>The chat system is scoped to the current UI context, so operator questions stay grounded in visible data.</p>
+          </article>
+          <article>
+            <h3>Multi-user access</h3>
+            <p>Username/password login with scrypt-hashed credentials, admin-managed accounts, and roles; deliverables download over authenticated requests, never open links.</p>
+          </article>
+          <article>
+            <h3>Private-mode switch</h3>
+            <p>One toggle returns the workspace to admin-only on demand, so access can be opened and closed without redeploying anything.</p>
+          </article>
+          <article>
+            <h3>Runtime settings</h3>
+            <p>Operators can inspect health, SSE state, model tier, auth source, effective models, LAN sharing, and hidden-client recovery from one Settings page.</p>
+          </article>
+          <article>
+            <h3>Self-correction loop</h3>
+            <p>A validation critic reviews each maker's output and re-dispatches it with the critique when a check fails, before anything reaches delivery.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section investor reveal" aria-labelledby="investor-title">
+        <div>
+          <h2 id="investor-title">Why this can become more than an internal tool.</h2>
+          <p>
+            Vi Data Ops Agent packages a repeated expert workflow into an
+            auditable system: one cockpit, reusable knowledge, consistent output,
+            analytics for both operators and CPs, and a path from local use to
+            enterprise-grade deployment.
+          </p>
+        </div>
+        <div class="investor-points">
+          <div><strong>Wedge</strong><span>Pharma audience ops has recurring, high-friction workflows.</span></div>
+          <div><strong>Telemetry</strong><span>Run health, stage latency, shipped files, and CP approvals make the workflow measurable.</span></div>
+          <div><strong>Moat</strong><span>Client history, operator feedback, corrections, and cross-client patterns compound.</span></div>
+          <div><strong>Expansion</strong><span>Every track can become a governed workflow module with its own analytics view.</span></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <img src="assets/vi-logo-black.png" alt="Vi" />
+        <span>Vi Data Ops Agent</span>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
