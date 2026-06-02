@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Vi Data Ops — Mobile · B · App-Native</title>
+  <link rel="icon" type="image/png" href="assets/vi-logo-black.png" />
+  <link rel="stylesheet" href="mobile/base.css" />
+  <style>
+    /* ============ Variant B — App-Native / Bottom bar / Thin display ============ */
+    body { --pad: 22px; padding-bottom: calc(98px + env(safe-area-inset-bottom)); }
+
+    /* Slim translucent top bar */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      height: calc(54px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top);
+      display: flex; align-items: center; justify-content: space-between;
+      padding-left: var(--pad); padding-right: var(--pad);
+      color: #fff; background: rgba(20,9,35,0.74);
+      backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .topbar .brand { display: flex; align-items: center; gap: 9px; }
+    .topbar .brand img { width: 26px; height: 26px; object-fit: contain; }
+    .topbar .brand b { font-size: 14px; font-weight: 500; letter-spacing: 0.01em; }
+    .top-status { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.72); }
+    .top-status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--aqua-bolt, #00dbd0); box-shadow: 0 0 0 4px rgba(0,219,208,0.18); animation: pulseDot 1.8s ease-in-out infinite; }
+    .scroll-progress { top: calc(54px + env(safe-area-inset-top)); }
+
+    /* Floating pill nav (modern, hides on scroll) */
+    .fnav {
+      position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom)); transform: translateX(-50%);
+      z-index: 70; display: flex; align-items: center; gap: 2px; padding: 7px;
+      background: rgba(20,9,35,0.86); backdrop-filter: blur(22px) saturate(160%);
+      border: 1px solid rgba(255,255,255,0.14); border-radius: 999px;
+      box-shadow: 0 18px 44px rgba(20,9,35,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+      transition: transform 320ms cubic-bezier(0.3,0,0.1,1), opacity 320ms ease;
+      max-width: calc(100% - 28px);
+    }
+    .fnav.is-hidden { transform: translateX(-50%) translateY(170%); opacity: 0; }
+    .fnav a { position: relative; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 999px; color: rgba(255,255,255,0.62); transition: color 200ms ease, background 200ms ease; }
+    .fnav a svg { width: 21px; height: 21px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .fnav a.is-active { color: #fff; background: rgba(255,255,255,0.14); }
+    .fnav a.is-active::after { content: ""; position: absolute; bottom: 5px; width: 4px; height: 4px; border-radius: 50%; background: var(--aqua-bolt, #00dbd0); }
+    .fnav .sep { width: 1px; height: 26px; background: rgba(255,255,255,0.16); margin: 0 5px; }
+    .fnav .fcta { width: auto; padding: 0 18px; height: 46px; border-radius: 999px; background: var(--violet); color: #fff; font-weight: 700; font-size: 13px; display: inline-flex; align-items: center; transition: background 200ms ease; }
+    .fnav .fcta:hover, .fnav .fcta:active { background: var(--vi-violet-800, #351fa3); }
+
+    /* Hero — thin couture display (design-system signature) */
+    .hero { padding-top: calc(40px + env(safe-area-inset-top)); padding-bottom: 64px; }
+    .hero h1 { font-size: clamp(52px, 17vw, 80px); line-height: 0.92; letter-spacing: -0.035em; font-weight: 200; }
+    .hero h1 b { font-weight: 500; }
+    .hero-lede { font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.8); }
+    .hero-eyebrow { font-weight: 500; }
+
+    /* Section heads — thin display */
+    .section { padding-top: clamp(64px, 16vw, 92px); padding-bottom: clamp(64px, 16vw, 92px); }
+    .section-head h2 { font-weight: 200; letter-spacing: -0.03em; font-size: clamp(34px, 10vw, 46px); line-height: 1.0; }
+    .section-head h2 b, .investor h2 { font-weight: 500; }
+    .investor h2 { font-weight: 200; }
+    .briefing-panel h3, .track-card h3, .flow-step h3, .release-card h3, .control-card h3 { font-weight: 600; }
+
+    /* Architecture — horizontal swipe panels + bottom sheet */
+    .arch { background: #eef8fb; }
+    /* live trace header */
+    .arch-trace { margin-bottom: 18px; }
+    .arch-trace-top { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .arch-trace-top .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--aqua); box-shadow: 0 0 0 4px rgba(0,182,208,0.16); animation: pulseDot 1.8s ease-in-out infinite; flex: 0 0 auto; }
+    .arch-trace-top .lead { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+    .arch-trace-top .now { font-size: 14px; font-weight: 600; color: var(--ink); transition: opacity 200ms ease; }
+    .trace-bar { display: flex; align-items: center; gap: 3px; height: 16px; }
+    .trace-seg { flex: 1 1 0; height: 5px; border-radius: 3px; border: 0; padding: 0; opacity: 0.26; transition: opacity 240ms ease, transform 240ms ease, box-shadow 240ms ease; cursor: pointer; }
+    .trace-seg.layer-interface { background: var(--violet); }
+    .trace-seg.layer-control { background: var(--aqua); }
+    .trace-seg.layer-execution { background: var(--orange); }
+    .trace-seg.layer-delivery { background: var(--green); }
+    .trace-seg.is-active { opacity: 1; transform: scaleY(2.4); box-shadow: 0 4px 12px rgba(20,9,35,0.16); }
+
+    .arch-track {
+      display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory;
+      padding: 4px 0 16px; margin: 0 calc(var(--pad) * -1); padding-left: var(--pad); padding-right: var(--pad);
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    }
+    .arch-track::-webkit-scrollbar { display: none; }
+    .arch-panel {
+      flex: 0 0 86%; scroll-snap-align: center; position: relative;
+      border: 1px solid var(--line); border-radius: var(--radius); background: #fff; box-shadow: var(--shadow-soft);
+      padding: 18px 16px 16px; overflow: hidden;
+    }
+    .arch-panel::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+    .arch-panel.layer-interface::before { background: var(--violet); }
+    .arch-panel.layer-control::before { background: var(--aqua); }
+    .arch-panel.layer-execution::before { background: var(--orange); }
+    .arch-panel.layer-delivery::before { background: var(--green); }
+    .arch-panel-head { display: flex; align-items: center; gap: 11px; margin-bottom: 15px; padding-left: 6px; }
+    .arch-panel-head .ldot { width: 12px; height: 12px; border-radius: 50%; flex: 0 0 auto; }
+    .arch-panel-meta { flex: 1; }
+    .arch-panel-num { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+    .arch-panel-head h3 { font-size: 17px; font-weight: 600; margin-top: 1px; }
+    .arch-panel-count { width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; font-size: 12px; font-weight: 700; color: var(--ink-soft); background: var(--gray-100, #eceff5); flex: 0 0 auto; }
+    .arch-panel-nodes { display: grid; gap: 8px; padding-left: 6px; }
+    .arch-panel .topo-node { padding-right: 34px; }
+    .arch-panel .topo-node::after { content: ""; position: absolute; right: 15px; top: 50%; width: 7px; height: 7px; border-right: 2px solid var(--faint); border-top: 2px solid var(--faint); transform: translateY(-60%) rotate(45deg); opacity: 0.5; transition: border-color 200ms ease, opacity 200ms ease; }
+    .arch-panel .topo-node.is-focus::after { border-color: var(--aqua); opacity: 1; }
+    .sc-dots { display: flex; justify-content: center; gap: 7px; margin-top: 6px; }
+    .sc-dot { width: 7px; height: 7px; border-radius: 50%; border: 0; background: var(--gray-300, #c7cdd7); padding: 0; transition: width 200ms ease, background 200ms ease; }
+    .sc-dot.is-active { width: 20px; border-radius: 999px; background: var(--violet); }
+
+    .sheet { position: fixed; inset: 0; z-index: 90; display: flex; align-items: flex-end; pointer-events: none; }
+    .sheet::before { content: ""; position: absolute; inset: 0; background: rgba(20,9,35,0.4); opacity: 0; transition: opacity 280ms ease; }
+    .sheet.is-open { pointer-events: auto; }
+    .sheet.is-open::before { opacity: 1; }
+    .sheet-panel {
+      position: relative; width: 100%; background: #fff; border-radius: 22px 22px 0 0;
+      padding: 12px 22px calc(26px + env(safe-area-inset-bottom)); box-shadow: 0 -20px 50px rgba(20,9,35,0.2);
+      transform: translateY(100%); transition: transform 320ms cubic-bezier(0.3,0,0.1,1);
+    }
+    .sheet.is-open .sheet-panel { transform: translateY(0); }
+    .sheet-grab { width: 40px; height: 4px; border-radius: 99px; background: var(--gray-300, #c7cdd7); margin: 4px auto 16px; }
+    .sheet-tag { display: inline-flex; align-items: center; justify-content: center; min-width: 34px; height: 22px; padding: 0 8px; border-radius: 6px; font-size: 11px; font-weight: 800; color: #fff; background: var(--aqua); }
+    .sheet-title { margin-top: 12px; font-size: 22px; font-weight: 500; line-height: 1.15; }
+    .sheet-body { margin-top: 10px; color: var(--ink-soft); font-size: 15px; line-height: 1.55; }
+    .sheet-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+    .sheet-chips .lbl { font-size: 11px; font-weight: 700; color: var(--faint); align-self: center; }
+    .sheet-chips .c { font-size: 11px; font-weight: 700; padding: 5px 9px; border-radius: 7px; background: var(--aqua-soft); color: var(--ink); }
+    .sheet-close { position: absolute; top: 14px; right: 16px; width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line); background: #fff; font-size: 18px; color: var(--muted); }
+
+    /* Showcase — swipe carousel */
+    .sc-carousel { margin: 0 calc(var(--pad) * -1); }
+    .sc-track {
+      display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+      padding: 0 var(--pad);
+    }
+    .sc-track::-webkit-scrollbar { display: none; }
+    .sc-slide { flex: 0 0 100%; scroll-snap-align: center; margin: 0; padding-right: 12px; }
+    .sc-slide:last-child { padding-right: 0; }
+    .sc-slide img { width: 100%; aspect-ratio: 16/10; object-fit: cover; object-position: left top; border: 1px solid var(--line); border-radius: 14px; background: #f0f2f7; box-shadow: var(--shadow); }
+    .sc-cap { padding: 0 var(--pad); margin-top: 16px; color: var(--ink-soft); font-size: 14px; line-height: 1.5; min-height: 60px; }
+    .sc-hint { display: inline-flex; align-items: center; gap: 7px; margin: 2px 0 0; padding: 0 var(--pad); font-size: 12px; font-weight: 700; color: var(--violet); }
+    .sc-hint svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .sc-slide { position: relative; }
+    .sc-slide .expand { position: absolute; top: 10px; right: 22px; width: 36px; height: 36px; border-radius: 10px; border: 0; display: grid; place-items: center; background: rgba(20,9,35,0.6); backdrop-filter: blur(6px); }
+    .sc-slide:last-child .expand { right: 10px; }
+    .sc-slide .expand svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Fullscreen zoomable screenshot viewer */
+    .viewer { position: fixed; inset: 0; z-index: 95; display: flex; flex-direction: column; background: rgba(8,4,16,0.97); opacity: 0; visibility: hidden; transition: opacity 240ms ease; }
+    .viewer.is-open { opacity: 1; visibility: visible; }
+    .viewer-head { display: flex; align-items: center; justify-content: space-between; padding: calc(14px + env(safe-area-inset-top)) 18px 12px; color: #fff; }
+    .viewer-head .vlabel { font-size: 15px; font-weight: 600; }
+    .viewer-head button { width: 40px; height: 40px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.08); color: #fff; font-size: 22px; }
+    .viewer-stage { flex: 1; overflow: auto; -webkit-overflow-scrolling: touch; display: flex; align-items: center; }
+    .viewer-stage img { height: auto; width: 175%; max-width: none; display: block; margin: auto; transition: width 260ms ease; }
+    .viewer-stage.is-fit img { width: 100%; }
+    .viewer-tip { text-align: center; font-size: 11px; color: rgba(255,255,255,0.5); padding: 8px 0 4px; }
+    .viewer-foot { padding: 8px 18px calc(16px + env(safe-area-inset-bottom)); color: rgba(255,255,255,0.78); display: flex; align-items: center; gap: 12px; }
+    .viewer-foot .vcap { flex: 1; font-size: 13px; line-height: 1.45; }
+    .viewer-foot button { width: 44px; height: 44px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.08); color: #fff; font-size: 22px; flex: 0 0 auto; }
+  </style>
+</head>
+<body data-variant="b">
+  <div class="scroll-progress" aria-hidden="true"><span id="progress"></span></div>
+
+  <header class="topbar">
+    <a class="brand" href="#top"><img src="assets/vi-logo-white.png" alt="" /><b>Vi Data Ops</b></a>
+    <span class="top-status"><span class="dot"></span>System healthy</span>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <canvas id="hero-network" aria-hidden="true"></canvas>
+      <div class="hero-inner">
+        <span class="hero-eyebrow"><span class="dot"></span>Live workspace · system healthy</span>
+        <h1>Vi Data <b>Ops</b> Agent</h1>
+        <p class="hero-lede">A local-first, authenticated operations cockpit that turns pharma audience data work into traceable runs, contextual guidance, two-audience analytics, and validated outputs.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#briefing">Why it matters</a>
+          <a class="btn secondary" href="#architecture">How it works</a>
+        </div>
+        <dl class="hero-metrics">
+          <div class="metric"><dt data-count="69">0</dt><dd>recorded runs</dd></div>
+          <div class="metric"><dt data-count="31">0</dt><dd>client profiles</dd></div>
+          <div class="metric"><dt data-count="3">0</dt><dd>independent tracks</dd></div>
+          <div class="metric"><dt data-count="2">0</dt><dd>analytics audiences</dd></div>
+        </dl>
+        <div class="hero-media">
+          <img src="assets/product-dashboard.png" alt="Vi Data Ops dashboard preview" />
+          <div class="scan-line"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BRIEFING -->
+    <section id="briefing" class="section reveal">
+      <div class="section-head">
+        <span class="kicker">The briefing</span>
+        <h2>One system, read at <b>any altitude.</b></h2>
+        <p>The operating value is legible without a technical background, and the system boundaries hold up to close inspection.</p>
+      </div>
+      <div class="briefing-grid">
+        <article class="briefing-panel is-active">
+          <h3>What changes on the floor</h3>
+          <p>Fragile handoffs go away. Files go in, the system shows exactly where they were routed, run health stays visible, risky changes wait for a human yes, and every session ends with concrete deliverables.</p>
+          <ul class="bullet-list"><li>Clear status for every client and pipeline.</li><li>Decision gates keep human judgment in the loop.</li><li>Analytics separate internal ops from partner-facing proof.</li></ul>
+        </article>
+        <article class="briefing-panel">
+          <h3>Where it compounds</h3>
+          <p>The wedge is operational AI with compliance-aware workflow design: deterministic processing, agent reasoning only where judgment is valuable, and telemetry from run health, approvals, and deliverable history.</p>
+          <ul class="bullet-list"><li>Expands from a local cockpit toward managed enterprise workflow.</li><li>Compounds with client history and cross-client patterns.</li><li>Anchored in painful, recurring pharma data operations.</li></ul>
+        </article>
+        <article class="briefing-panel">
+          <h3>How it actually works</h3>
+          <p>A React/Vite console talks to a Fastify control server, a SQLite run registry, live event streams, typed analytics endpoints, MCP tools, Python analysis, and track-specific agent runners whose output is critiqued before it ships.</p>
+          <ul class="bullet-list"><li>The run registry is the shared source of truth.</li><li>Typed MCP tools expose parse, validate, QA, and build.</li><li>Each track owns its own inputs, outputs, and rules.</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- FLOW -->
+    <section class="section is-dark reveal">
+      <div class="section-head">
+        <span class="kicker" style="color:var(--aqua)">The flow</span>
+        <h2>From messy inputs to <b>governed delivery.</b></h2>
+        <p>The app is the operating layer between raw pharma audience data and client-ready artifacts.</p>
+      </div>
+      <div class="flow-map" id="flow-map">
+        <div class="flow-rail"><span class="flow-rail-fill" id="flow-fill"></span></div>
+        <div class="flow-step is-active" data-engine="det"><span class="flow-num">01</span><span class="flow-engine">Deterministic</span><h3>Upload</h3><p>Files, folders, zips, briefs, audit bundles, CSV specs, and JSON configs land in one operator-facing router.</p><ul><li>Audit CSV/HTML</li><li>Claims CSV + JSON</li><li>Client Brief XLSX</li></ul></div>
+        <div class="flow-step" data-engine="det"><span class="flow-num">02</span><span class="flow-engine">Deterministic</span><h3>Resolve</h3><p>The router classifies track, client, file kind, and audience shape, then makes "Routed to: client" impossible to miss.</p><ul><li>Client + track confidence</li><li>Audience kind</li><li>No CSV = No QA</li></ul></div>
+        <div class="flow-step" data-engine="agent"><span class="flow-num">03</span><span class="flow-engine">Agent + tools</span><h3>Run</h3><p>The dispatcher advances stages, streams events, and fans out multi-audience Search Insights into grouped runs.</p><ul><li>Intent · Claims · Search</li><li>SSE stage events</li><li>Re-run from detail</li></ul></div>
+        <div class="flow-step" data-engine="human"><span class="flow-num">04</span><span class="flow-engine">Human in the loop</span><h3>Decide</h3><p>Decision gates, readiness badges, audience policy badges, and context-aware Copilot keep review grounded in the current screen.</p><ul><li>Ready / review / blocked</li><li>Patch vs supersede</li><li>Route-aware Copilot</li></ul></div>
+        <div class="flow-step" data-engine="det"><span class="flow-num">05</span><span class="flow-engine">Deterministic</span><h3>Deliver</h3><p>Validated workbooks, fixed JSON, payer artifacts, summaries, and analytics rollups land in the right domain.</p><ul><li>5-sheet SI workbooks</li><li>Diff XLSX + QA summary</li><li>Reusable learning</li></ul></div>
+      </div>
+    </section>
+
+    <!-- LATEST -->
+    <section id="latest" class="section reveal">
+      <div class="section-head">
+        <span class="kicker">Latest build</span>
+        <h2>Shared, secured, <b>self-correcting.</b></h2>
+        <p>Recent work made the cockpit usable by a team without losing control: multi-user access, a one-switch private mode, runtime settings, and agents that review their own output.</p>
+      </div>
+      <div class="release-grid" id="release-grid"></div>
+    </section>
+
+    <!-- TRACKS -->
+    <section id="tracks" class="section reveal">
+      <div class="section-head">
+        <span class="kicker">Three tracks</span>
+        <h2>Three independent <b>business tracks.</b></h2>
+        <p>Web-intent optimization, claims audience QA, and new-client Search Insights never share data or assumptions.</p>
+      </div>
+      <div class="track-grid">
+        <article class="track-card"><div class="track-icon intent"></div><h3>Intent Audit Optimization</h3><p>Parses audit CSV and HTML folders, asks one analyst agent to reason over pre-parsed context, validates the analysis, then finalizes an optimization workbook.</p><dl><div><dt>Inputs</dt><dd>Audit folders, keywords, URL quality, agent text.</dd></div><div><dt>Outputs</dt><dd>Optimization XLSX, JSON analysis, summary, change log.</dd></div></dl></article>
+        <article class="track-card"><div class="track-icon claims"></div><h3>Claims QA</h3><p>Compares CSV source-of-truth rules against claims JSON, builds fixed configs, produces diff workbooks, and supports payer modes.</p><dl><div><dt>Inputs</dt><dd>CSV rule spec plus JSON audience config.</dd></div><div><dt>Outputs</dt><dd>Fixed JSON, diff XLSX, payer report, QA summary.</dd></div><div><dt>Guardrail</dt><dd>No CSV = No QA; caregiver and HCP follow policy gates.</dd></div></dl></article>
+        <article class="track-card"><div class="track-icon search"></div><h3>Search Insights Builder</h3><p>Turns a client brief, profile, or thin JSON into a complete activation workbook. Brief uploads get parser preview, audience combo selection, and grouped fan-out before build.</p><dl><div><dt>Inputs</dt><dd>Client brief XLSX, leading indicators, or profile JSON.</dd></div><div><dt>Outputs</dt><dd>One or more 5-sheet workbooks plus source sub-files and group manifest.</dd></div></dl></article>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE -->
+    <section id="architecture" class="section arch reveal">
+      <div class="section-head">
+        <span class="kicker">Architecture</span>
+        <h2>Judgment separated from <b>mechanics.</b></h2>
+        <p>Deterministic scripts do parsing, validation, and assembly. Agents handle the parts that need judgment. Swipe the layers, tap any node for detail.</p>
+      </div>
+      <div class="arch-trace">
+        <div class="arch-trace-top"><span class="dot"></span><span class="lead">Live trace</span><span class="now" id="live-label">React / Vite console</span></div>
+        <div class="trace-bar" id="trace-bar"></div>
+      </div>
+      <div class="arch-track" id="arch-track"></div>
+      <div class="sc-dots" id="arch-dots"></div>
+      <div class="layer-legend">
+        <span><i class="ld det"></i>Deterministic</span><span><i class="ld agt"></i>Agent judgment</span><span><i class="ld store"></i>State of record</span>
+      </div>
+    </section>
+
+    <!-- AGENTS -->
+    <section id="agents" class="section reveal">
+      <div class="section-head">
+        <span class="kicker">The roster</span>
+        <h2>Judgment where it <b>changes the outcome.</b></h2>
+        <p>Reasoning is spent only where it moves the result. Everything that can be deterministic stays deterministic, typed, and reproducible.</p>
+      </div>
+      <div class="roster">
+        <article class="roster-col"><h3>Reasoning agents</h3><ul>
+          <li><strong>Orchestrator</strong> — answers from the system's own data and dispatches runs only after confirmation.</li>
+          <li><strong>Audit analyst</strong> — reasons over pre-parsed audit context and proposes optimizations.</li>
+          <li><strong>Search Insights builder</strong> — turns a brief or profile into a five-sheet workbook.</li>
+          <li><strong>Claims QA</strong> — reconciles a JSON audience config against the CSV source-of-truth.</li>
+          <li><strong>Client-brief parser</strong> — extracts brand, codes, audiences, indicators, and KOLs.</li>
+          <li><strong>Upload classifier</strong> — resolves track, client, and audience from messy uploads.</li>
+          <li><strong>Client classifier</strong> — places each client in a seven-category taxonomy.</li>
+          <li><strong>Agent-text QA</strong> — scores agent text against eight standards.</li>
+          <li><strong>Validation critic</strong> — drives the bounded self-correction loop.</li>
+          <li><strong>Knowledge curator</strong> — prunes patterns and proposes standing-rule changes.</li>
+          <li><strong>Conflict detector</strong> — flags docs and rules that no longer match the code.</li>
+          <li><strong>Decision capture</strong> — distills operator decisions into institutional memory.</li>
+        </ul></article>
+        <article class="roster-col"><h3>Deterministic engines</h3><ul>
+          <li><strong>Parse → validate → finalize</strong> — agents think only in the middle.</li>
+          <li><strong>Quality gate</strong> — one check for consistency and completeness.</li>
+          <li><strong>Workbook builders</strong> — four- and five-sheet templates, reproducible.</li>
+          <li><strong>Schema validators</strong> — shared typed contracts that fail loud.</li>
+          <li><strong>Pattern extractor</strong> — turns runs and corrections into reusable patterns.</li>
+          <li><strong>Analysis engine</strong> — trends, anomalies, clustering, prediction, similarity.</li>
+          <li><strong>Dispatcher & watchdog</strong> — advances stages, fans out runs, recovers hung work.</li>
+          <li><strong>Upload router</strong> — classify, dedupe by hash, hard-link into the input tree.</li>
+          <li><strong>MCP server & dashboard</strong> — typed, test-backed tools plus a health surface.</li>
+        </ul></article>
+      </div>
+    </section>
+
+    <!-- PROOF / SHOWCASE -->
+    <section id="proof" class="section reveal">
+      <div class="section-head">
+        <span class="kicker">Proof</span>
+        <h2>Real product surfaces, <b>not a mock deck.</b></h2>
+        <p>Swipe through the running local app with chat collapsed: dashboard, analytics, the Search Insights wizard, Run Detail, upload routing, the system graph, Settings, admin Users, and login.</p>
+      </div>
+      <div class="sc-carousel">
+        <div class="sc-track" id="sc-track"></div>
+      </div>
+      <div class="sc-dots" id="sc-dots" style="margin-top:14px"></div>
+      <p class="sc-cap" id="sc-cap"></p>
+      <p class="sc-hint"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Tap any screen to open it full-size and zoom in</p>
+    </section>
+
+    <!-- CONTROLS -->
+    <section id="controls" class="section reveal">
+      <div class="section-head">
+        <span class="kicker">Guardrails</span>
+        <h2>Guardrails are <b>part of the product.</b></h2>
+        <p>The system is designed for a regulated, high-stakes operating context: it does not hide uncertainty behind automation.</p>
+      </div>
+      <div class="control-grid" id="control-grid"></div>
+    </section>
+
+    <!-- INVESTOR -->
+    <section class="reveal">
+      <div class="investor">
+        <h2>Why this can become more than an internal tool.</h2>
+        <p>Vi Data Ops Agent packages a repeated expert workflow into an auditable system: one cockpit, reusable knowledge, consistent output, analytics for both operators and CPs, and a path from local use to enterprise-grade deployment.</p>
+        <div class="investor-points">
+          <div><strong>Wedge</strong><span>Pharma audience ops has recurring, high-friction workflows.</span></div>
+          <div><strong>Telemetry</strong><span>Run health, stage latency, shipped files, and CP approvals make the workflow measurable.</span></div>
+          <div><strong>Moat</strong><span>Client history, operator feedback, corrections, and cross-client patterns compound.</span></div>
+          <div><strong>Expansion</strong><span>Every track can become a governed workflow module with its own analytics view.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <img src="assets/vi-logo-black.png" alt="Vi" />
+      <span>Vi Data Ops Agent</span>
+    </footer>
+  </main>
+
+  <!-- Bottom sheet for node detail -->
+  <div class="sheet" id="sheet">
+    <div class="sheet-panel">
+      <div class="sheet-grab"></div>
+      <button class="sheet-close" id="sheet-close" aria-label="Close">&times;</button>
+      <span class="sheet-tag" id="sheet-tag">UI</span>
+      <h3 class="sheet-title" id="sheet-title"></h3>
+      <p class="sheet-body" id="sheet-body"></p>
+      <div class="sheet-chips" id="sheet-chips"></div>
+    </div>
+  </div>
+
+  <!-- Floating pill nav -->
+  <nav class="fnav" id="fnav" aria-label="Primary">
+    <a href="#top" data-tab="top" class="is-active" aria-label="Top"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></a>
+    <a href="#tracks" data-tab="tracks" aria-label="Tracks"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="5" rx="1"/><rect x="3" y="14" width="18" height="5" rx="1"/></svg></a>
+    <a href="#architecture" data-tab="architecture" aria-label="System"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M6 8v3a3 3 0 003 3h6a3 3 0 003-3V8"/><path d="M12 14v2"/></svg></a>
+    <a href="#proof" data-tab="proof" aria-label="Proof"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg></a>
+    <span class="sep"></span>
+    <a href="#briefing" class="fcta">Briefing</a>
+  </nav>
+
+  <!-- Fullscreen zoomable screenshot viewer -->
+  <div class="viewer" id="viewer" aria-hidden="true">
+    <div class="viewer-head"><span class="vlabel" id="viewer-label"></span><button id="viewer-close" aria-label="Close">&times;</button></div>
+    <div class="viewer-stage" id="viewer-stage"><img id="viewer-img" alt="" /></div>
+    <p class="viewer-tip">Double-tap image to fit · drag to pan</p>
+    <div class="viewer-foot"><button id="viewer-prev" aria-label="Previous">‹</button><span class="vcap" id="viewer-cap"></span><button id="viewer-next" aria-label="Next">›</button></div>
+  </div>
+
+  <script src="mobile/base.js"></script>
+  <script src="mobile/content.js"></script>
+  <script>
+    (function () {
+      const V = window.ViMobile;
+      V.counters(); V.reveal(); V.scrollProgress(document.getElementById("progress"));
+      V.heroNetwork(document.getElementById("hero-network"));
+
+      V.autoCycle(Array.from(document.querySelectorAll(".briefing-panel")), 3600, null, { container: document.querySelector(".briefing-grid") });
+      const steps = Array.from(document.querySelectorAll(".flow-step"));
+      const fill = document.getElementById("flow-fill");
+      V.autoCycle(steps, 2200, (i) => { const pct = steps.length <= 1 ? 100 : (i / (steps.length - 1)) * 100; fill.style.height = Math.max(12, pct) + "%"; }, { container: document.getElementById("flow-map") });
+
+      ViContent.releases(document.getElementById("release-grid"));
+      ViContent.controls(document.getElementById("control-grid"));
+
+      // showcase swipe carousel
+      ViContent.showcaseSwipe({ track: document.getElementById("sc-track"), dots: document.getElementById("sc-dots"), cap: document.getElementById("sc-cap") });
+
+      // architecture swipe + bottom sheet
+      ViContent.archSwipe({
+        track: document.getElementById("arch-track"), dots: document.getElementById("arch-dots"),
+        liveLabel: document.getElementById("live-label"), traceBar: document.getElementById("trace-bar"),
+        sheet: document.getElementById("sheet"), sheetTitle: document.getElementById("sheet-title"),
+        sheetTag: document.getElementById("sheet-tag"), sheetBody: document.getElementById("sheet-body"),
+        sheetChips: document.getElementById("sheet-chips"), sheetClose: document.getElementById("sheet-close"),
+        section: document.getElementById("architecture"),
+      });
+
+      // floating nav: hide on scroll down, show on scroll up; scroll-spy active
+      const fnav = document.getElementById("fnav");
+      let lastY = window.scrollY;
+      let navPinnedUntil = 0;
+      fnav.querySelectorAll("a").forEach((a) => {
+        a.addEventListener("click", () => {
+          navPinnedUntil = Date.now() + 1400;
+          fnav.classList.remove("is-hidden");
+        });
+      });
+      window.addEventListener("scroll", () => {
+        const y = window.scrollY;
+        if (Date.now() < navPinnedUntil) {
+          fnav.classList.remove("is-hidden");
+        } else if (y > lastY + 8 && y > 260) fnav.classList.add("is-hidden");
+        else if (y < lastY - 8) fnav.classList.remove("is-hidden");
+        lastY = y;
+      }, { passive: true });
+      const tabs = Array.from(fnav.querySelectorAll("a[data-tab]"));
+      const sections = tabs.map((t) => document.getElementById(t.dataset.tab)).filter(Boolean);
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) { const id = e.target.id; tabs.forEach((t) => t.classList.toggle("is-active", t.dataset.tab === id)); } });
+        }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+        sections.forEach((s) => io.observe(s));
+      }
+
+      // fullscreen zoomable screenshot viewer
+      const viewer = document.getElementById("viewer");
+      const vImg = document.getElementById("viewer-img"), vCap = document.getElementById("viewer-cap"), vLabel = document.getElementById("viewer-label"), vStage = document.getElementById("viewer-stage");
+      const order = V.shotOrder, shots = V.shots;
+      let vIdx = 0;
+      function showViewer(i) {
+        vIdx = (i + order.length) % order.length;
+        const s = shots[order[vIdx]];
+        vImg.src = s.src; vImg.alt = s.alt; vCap.textContent = s.caption; vLabel.textContent = s.label;
+        vStage.classList.remove("is-fit");
+        requestAnimationFrame(() => { vStage.scrollLeft = (vStage.scrollWidth - vStage.clientWidth) / 2; });
+      }
+      function openViewer(i) { showViewer(i); viewer.classList.add("is-open"); document.body.style.overflow = "hidden"; }
+      function closeViewer() { viewer.classList.remove("is-open"); document.body.style.overflow = ""; }
+      document.getElementById("viewer-close").addEventListener("click", closeViewer);
+      document.getElementById("viewer-prev").addEventListener("click", () => showViewer(vIdx - 1));
+      document.getElementById("viewer-next").addEventListener("click", () => showViewer(vIdx + 1));
+      vStage.addEventListener("dblclick", () => vStage.classList.toggle("is-fit"));
+      document.querySelectorAll("#sc-track .sc-slide").forEach((sl, i) => {
+        const b = document.createElement("button");
+        b.className = "expand"; b.setAttribute("aria-label", "Open full size");
+        b.innerHTML = '<svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
+        b.addEventListener("click", (e) => { e.stopPropagation(); openViewer(i); });
+        sl.appendChild(b);
+        sl.addEventListener("click", () => openViewer(i));
+      });
+    })();
+  </script>
+</body>
+</html>

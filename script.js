@@ -509,12 +509,14 @@ function setupHeroNetwork() {
   requestAnimationFrame(draw);
 }
 
-setupCounters();
-setupReveal();
-setupScrollProgress();
-setupShowcase();
-setupFlowAnimation();
-setupFlowProgress();
-setupBriefingPanels();
-setupTopology();
-setupHeroNetwork();
+if (!document.documentElement.classList.contains("use-mobile-variant")) {
+  setupCounters();
+  setupReveal();
+  setupScrollProgress();
+  setupShowcase();
+  setupFlowAnimation();
+  setupFlowProgress();
+  setupBriefingPanels();
+  setupTopology();
+  setupHeroNetwork();
+}

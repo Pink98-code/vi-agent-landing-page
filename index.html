@@ -8,10 +8,25 @@
       name="description"
       content="A polished investor and executive landing page for the Vi Data Ops Agent: local-first pharma audience operations with analytics, contextual Copilot, governed runs, admin access controls, runtime settings, and validated deliverables."
     />
+    <script>
+      (function () {
+        if (window.matchMedia && window.matchMedia("(max-width: 760px)").matches) {
+          document.documentElement.classList.add("use-mobile-variant");
+        }
+      })();
+    </script>
     <link rel="icon" type="image/png" href="assets/vi-logo-black.png" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <iframe
+      id="mobile-variant-frame"
+      class="mobile-variant-frame"
+      title="Vi Data Ops Agent mobile landing"
+      data-src="variant-b.html"
+      aria-hidden="true"
+    ></iframe>
+
     <header class="site-nav" aria-label="Primary">
       <a class="brand" href="#top" aria-label="Vi Data Ops Agent home">
         <img src="assets/vi-logo-white.png" alt="Vi" />
@@ -698,6 +713,32 @@
       </div>
     </footer>
 
+    <script>
+      (function () {
+        const frame = document.getElementById("mobile-variant-frame");
+        if (!frame || !window.matchMedia) return;
+
+        const query = window.matchMedia("(max-width: 760px)");
+        function syncMobileVariant() {
+          const enabled = query.matches;
+          document.documentElement.classList.toggle("use-mobile-variant", enabled);
+          frame.setAttribute("aria-hidden", enabled ? "false" : "true");
+          if (enabled && !frame.getAttribute("src")) {
+            frame.setAttribute("src", frame.dataset.src);
+          }
+          if (!enabled && frame.getAttribute("src")) {
+            frame.removeAttribute("src");
+          }
+        }
+
+        syncMobileVariant();
+        if (query.addEventListener) {
+          query.addEventListener("change", syncMobileVariant);
+        } else if (query.addListener) {
+          query.addListener(syncMobileVariant);
+        }
+      })();
+    </script>
     <script src="script.js"></script>
   </body>
 </html>
