@@ -568,17 +568,19 @@ h1 {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
+  padding-top: 28px;
 }
 
 .flow-track {
   position: absolute;
   left: 6%;
   right: 6%;
-  top: 53px;
+  top: 11px;
   height: 3px;
   border-radius: 99px;
   background: rgba(255, 255, 255, 0.14);
   overflow: hidden;
+  pointer-events: none;
 }
 
 .flow-track-fill {
@@ -634,19 +636,6 @@ h1 {
 }
 
 .flow-step::after {
-  content: "";
-  position: absolute;
-  top: 47px;
-  right: -20px;
-  width: 27px;
-  height: 14px;
-  background:
-    linear-gradient(45deg, transparent 48%, rgba(217, 255, 251, 0.75) 50%, transparent 54%),
-    linear-gradient(-45deg, transparent 48%, rgba(217, 255, 251, 0.75) 50%, transparent 54%);
-  opacity: 0.58;
-}
-
-.flow-step:last-child::after {
   display: none;
 }
 

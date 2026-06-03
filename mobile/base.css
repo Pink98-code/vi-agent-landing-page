@@ -1,9 +1,9 @@
 /* =========================================================
-   Vi Data Ops — Mobile base
+   Vi Data Ops: Mobile base
    Shared tokens, typography, sections, cards, animations.
    Variant files (variant-a/b/c) link this first, then add a
    <style> block for nav / hero / architecture / showcase.
-   Designed mobile-first for ~360–430px viewports.
+   Designed mobile-first for ~360-430px viewports.
    ========================================================= */
 
 /* --- Fonts (Inter, on-brand weights incl. thin display) --- */
@@ -247,7 +247,7 @@ h1, h2, h3, p { margin: 0; }
 }
 
 /* ---------------------------------------------------------
-   BRIEFING — stacked cards, auto-highlight cycle
+   BRIEFING: stacked cards, auto-highlight cycle
    --------------------------------------------------------- */
 .briefing-grid { display: grid; gap: 12px; }
 .briefing-panel {
@@ -277,7 +277,7 @@ h1, h2, h3, p { margin: 0; }
 }
 
 /* ---------------------------------------------------------
-   FLOW MAP — vertical timeline on mobile
+   FLOW MAP: vertical timeline on mobile
    --------------------------------------------------------- */
 .flow-map { position: relative; padding-left: 4px; }
 .flow-rail {
@@ -330,7 +330,7 @@ h1, h2, h3, p { margin: 0; }
 }
 
 /* ---------------------------------------------------------
-   LATEST — release cards (tidy 1-col with index chips)
+   LATEST: release cards (tidy 1-col with index chips)
    --------------------------------------------------------- */
 .release-grid { display: grid; gap: 10px; }
 .release-card {
@@ -350,7 +350,7 @@ h1, h2, h3, p { margin: 0; }
 .release-card p { margin-top: 7px; color: var(--ink-soft); font-size: 13.5px; line-height: 1.48; }
 
 /* ---------------------------------------------------------
-   TRACKS — stacked cards
+   TRACKS: stacked cards
    --------------------------------------------------------- */
 .track-grid { display: grid; gap: 14px; }
 .track-card {
@@ -378,7 +378,7 @@ h1, h2, h3, p { margin: 0; }
 .track-card dd { margin: 4px 0 0; color: var(--muted); line-height: 1.45; font-size: 14px; }
 
 /* ---------------------------------------------------------
-   ROSTER — two stacked lists
+   ROSTER: two stacked lists
    --------------------------------------------------------- */
 .roster { display: grid; gap: 14px; }
 .roster-col {
@@ -393,7 +393,7 @@ h1, h2, h3, p { margin: 0; }
 .roster-col li strong { color: var(--ink); font-weight: 600; }
 
 /* ---------------------------------------------------------
-   CONTROLS — guardrail cards
+   CONTROLS: guardrail cards
    --------------------------------------------------------- */
 .control-grid { display: grid; gap: 12px; }
 .control-card {
@@ -408,7 +408,7 @@ h1, h2, h3, p { margin: 0; }
 .control-card p { margin-top: 8px; color: var(--ink-soft); font-size: 14px; line-height: 1.5; }
 
 /* ---------------------------------------------------------
-   INVESTOR — closing card
+   INVESTOR: closing card
    --------------------------------------------------------- */
 .investor {
   margin: 0 var(--pad) clamp(40px, 10vw, 64px);

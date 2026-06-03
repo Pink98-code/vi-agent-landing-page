@@ -226,9 +226,9 @@
         <div class="section-head">
           <h2 id="latest-title">Latest build: shared, secured, configurable, and self-correcting.</h2>
           <p>
-            On top of an already audience-aware cockpit &mdash; analytics, safer
+            On top of an already audience-aware cockpit: analytics, safer
             routing, re-runs, correction history, multi-audience fan-out, and
-            policy gates &mdash; the recent work made it usable by a team without
+            policy gates. The recent work made it usable by a team without
             losing control: real multi-user access, a one-switch private mode,
             authenticated downloads, runtime model/auth settings, LAN-sharing
             readouts, and agents that review and correct their own output before
@@ -295,7 +295,7 @@
           <article>
             <span>12</span>
             <h3>Self-correcting agents</h3>
-            <p>A validation critic now reviews each maker's output before delivery and re-dispatches it with the critique when a check fails &mdash; a bounded self-correction loop &mdash; while each agent's model tier is resolved from the auth context.</p>
+            <p>A validation critic now reviews each maker's output before delivery and re-dispatches it with the critique when a check fails: a bounded self-correction loop. Each agent's model tier is resolved from the auth context.</p>
           </article>
           <article>
             <span>13</span>
@@ -416,7 +416,7 @@
                   Auth &amp; sessions
                   <small>roles · private-mode switch</small>
                 </button>
-                <button class="topo-node" data-node="sse" data-detail="A Server-Sent Events stream pushes real stage transitions, logs, and errors to the cockpit as runs advance &mdash; no invented progress bars.">
+                <button class="topo-node" data-node="sse" data-detail="A Server-Sent Events stream pushes real stage transitions, logs, and errors to the cockpit as runs advance. No invented progress bars.">
                   <span class="topo-tag">SSE</span>
                   Live event stream
                   <small>stage events · logs</small>
@@ -440,17 +440,17 @@
                   Track runners
                   <small>intent · claims · SI</small>
                 </button>
-                <button class="topo-node" data-node="makers" data-detail="The reasoning agents that produce work: an audit analyst, a Search Insights builder, a Claims QA agent, a client-brief parser, and a lightweight upload classifier. Each agent&rsquo;s model tier is resolved from the auth context &mdash; heavier reasoning where judgment pays, cheap classifiers where it doesn&rsquo;t.">
+                <button class="topo-node" data-node="makers" data-detail="The reasoning agents that produce work: an audit analyst, a Search Insights builder, a Claims QA agent, a client-brief parser, and a lightweight upload classifier. Each agent&rsquo;s model tier is resolved from the auth context: heavier reasoning where judgment pays, cheap classifiers where it doesn&rsquo;t.">
                   <span class="topo-tag">AGT</span>
                   Maker agents
                   <small>analyst · builder · QA · parser</small>
                 </button>
-                <button class="topo-node" data-node="classify" data-detail="A classification engine places each client in a closed seven-category taxonomy from weighted signals &mdash; orphan ICD codes, drug brands, lexicon hits &mdash; pinned by golden-fixture tests so a lexicon edit can&rsquo;t silently re-classify existing clients. An operator override always wins.">
+                <button class="topo-node" data-node="classify" data-detail="A classification engine places each client in a closed seven-category taxonomy from weighted signals: orphan ICD codes, drug brands, and lexicon hits, all pinned by golden-fixture tests so a lexicon edit can&rsquo;t silently re-classify existing clients. An operator override always wins.">
                   <span class="topo-tag">CLS</span>
                   Classification engine
                   <small>7-category · signals</small>
                 </button>
-                <button class="topo-node" data-node="critic" data-detail="A generalized validation critic reviews each maker&rsquo;s output before delivery. A failed verdict re-dispatches the same maker inline with the critique appended &mdash; a bounded self-correction loop &mdash; while a stagnation guard stops a maker that isn&rsquo;t converging.">
+                <button class="topo-node" data-node="critic" data-detail="A generalized validation critic reviews each maker&rsquo;s output before delivery. A failed verdict re-dispatches the same maker inline with the critique appended: a bounded self-correction loop. A stagnation guard stops a maker that isn&rsquo;t converging.">
                   <span class="topo-tag">CRT</span>
                   Validation critic
                   <small>self-correction loop</small>
@@ -460,12 +460,12 @@
                   MCP tool layer
                   <small>parse · validate · build</small>
                 </button>
-                <button class="topo-node" data-node="quality" data-detail="A consolidated quality gate runs before a run is allowed to finish: it reconciles cross-reader consistency and confirms every expected artifact exists and is well-formed &mdash; the old separate cross-validation and health-monitor phases, folded into one deterministic check.">
+                <button class="topo-node" data-node="quality" data-detail="A consolidated quality gate runs before a run is allowed to finish: it reconciles cross-reader consistency and confirms every expected artifact exists and is well-formed. The old separate cross-validation and health-monitor phases are folded into one deterministic check.">
                   <span class="topo-tag">QG</span>
                   Quality gate
                   <small>consistency · completeness</small>
                 </button>
-                <button class="topo-node" data-node="analysis" data-detail="Python analysis modules handle trends, anomalies, clustering, prediction, cross-client similarity, and workbook assembly &mdash; the heavy quality work that stays deterministic and reproducible.">
+                <button class="topo-node" data-node="analysis" data-detail="Python analysis modules handle trends, anomalies, clustering, prediction, cross-client similarity, and workbook assembly: the heavy quality work that stays deterministic and reproducible.">
                   <span class="topo-tag">PY</span>
                   Python analysis
                   <small>stats · workbooks</small>
@@ -484,17 +484,17 @@
                   Analytics views
                   <small>internal · partner-facing</small>
                 </button>
-                <button class="topo-node" data-node="learning" data-detail="Corrections, keyword outcomes, and recurring cross-client patterns accrue into a pattern registry that later runs read from &mdash; the part of the system that compounds with every client and every operator decision.">
+                <button class="topo-node" data-node="learning" data-detail="Corrections, keyword outcomes, and recurring cross-client patterns accrue into a pattern registry that later runs read from. It is the part of the system that compounds with every client and every operator decision.">
                   <span class="topo-tag">LRN</span>
                   Cross-client learning
                   <small>patterns · outcomes</small>
                 </button>
-                <button class="topo-node" data-node="curator" data-detail="A knowledge-curator agent maintains the learning base: it prunes stale patterns, reconciles the critic&rsquo;s calibration signal, and drafts standing-rule changes as proposals for review &mdash; it never auto-applies a rule. A separate conflict detector flags docs and rules that drift from the running code.">
+                <button class="topo-node" data-node="curator" data-detail="A knowledge-curator agent maintains the learning base: it prunes stale patterns, reconciles the critic&rsquo;s calibration signal, and drafts standing-rule changes as proposals for review. It never auto-applies a rule. A separate conflict detector flags docs and rules that drift from the running code.">
                   <span class="topo-tag">KB</span>
                   Knowledge curator
                   <small>prune · calibrate · propose</small>
                 </button>
-                <button class="topo-node" data-node="decisions" data-detail="Operator gate decisions are captured and distilled into reusable, generalizable patterns &mdash; proposed for review, never auto-applied &mdash; so human judgment becomes durable institutional memory instead of a one-off click.">
+                <button class="topo-node" data-node="decisions" data-detail="Operator gate decisions are captured and distilled into reusable, generalizable patterns. They are proposed for review, never auto-applied, so human judgment becomes durable institutional memory instead of a one-off click.">
                   <span class="topo-tag">DEC</span>
                   Decision capture
                   <small>judgment &rarr; memory</small>
@@ -516,7 +516,7 @@
               <h3 id="topo-detail-title">A live multi-agent system, one source of truth</h3>
               <p id="topo-detail-body">
                 Hover or tap any node to trace exactly which subsystems it talks to.
-                Every path here is a real boundary in the codebase &mdash; the run
+                Every path here is a real boundary in the codebase: the run
                 registry sits at the center, deterministic mechanics stay reproducible,
                 and judgment-heavy work is fenced inside agents that critique and
                 correct each other before anything is delivered.
@@ -527,9 +527,9 @@
               <li>A shared registry records every run, stage, gate, decision, log, and artifact; an append-only event log replays it.</li>
               <li>Reasoning agents are isolated per track; each maker&rsquo;s output passes a validation critic, with a bounded self-correction loop on failure.</li>
               <li>A consolidated quality gate checks cross-reader consistency and artifact completeness before a run can finish.</li>
-              <li>Model tier is resolved from the auth context &mdash; heavier reasoning where judgment pays, cheap classifiers where it does not.</li>
+              <li>Model tier is resolved from the auth context: heavier reasoning where judgment pays, cheap classifiers where it does not.</li>
               <li>Deterministic tools are typed and test-backed: parse, validate, finalize, QA, build, knowledge.</li>
-              <li>Live events keep the cockpit honest &mdash; real stage transitions, never invented progress.</li>
+              <li>Live events keep the cockpit honest: real stage transitions, never invented progress.</li>
               <li>Zod-backed OpenAPI and shared enums keep UI, server, and tests aligned.</li>
               <li>Multi-user access with roles and a one-switch private mode, and authenticated deliverable downloads.</li>
               <li>Corrections and cross-client patterns compound into a registry that future runs read from.</li>
@@ -543,7 +543,7 @@
           <h2 id="roster-title">Judgment where it changes the outcome; mechanics everywhere else.</h2>
           <p>
             Reasoning is spent only where it moves the result. Everything that can
-            be deterministic stays deterministic, typed, and reproducible &mdash; the
+            be deterministic stays deterministic, typed, and reproducible. The
             system is auditable, not a black box.
           </p>
         </div>
@@ -551,32 +551,32 @@
           <article class="roster-col">
             <h3>Reasoning agents</h3>
             <ul>
-              <li><strong>Orchestrator</strong> &mdash; answers from the system&rsquo;s own data and dispatches runs only after an explicit confirmation.</li>
-              <li><strong>Audit analyst</strong> &mdash; reasons over pre-parsed audit context and proposes optimizations.</li>
-              <li><strong>Search Insights builder</strong> &mdash; turns a brief or profile into a five-sheet activation workbook.</li>
-              <li><strong>Claims QA</strong> &mdash; reconciles a JSON audience config against the CSV source-of-truth.</li>
-              <li><strong>Client-brief parser</strong> &mdash; extracts brand, codes, audiences, indicators, and KOLs from a brief.</li>
-              <li><strong>Upload classifier</strong> &mdash; resolves track, client, and audience from messy uploads on a lightweight tier.</li>
-              <li><strong>Client classifier</strong> &mdash; places each client in a seven-category taxonomy from weighted signals, pinned by golden fixtures.</li>
-              <li><strong>Agent-text QA</strong> &mdash; scores agent text against eight standards before it reaches a partner.</li>
-              <li><strong>Validation critic</strong> &mdash; reviews every maker&rsquo;s output and drives the bounded self-correction loop.</li>
-              <li><strong>Knowledge curator</strong> &mdash; prunes stale patterns, calibrates, and proposes standing-rule changes for review.</li>
-              <li><strong>Conflict detector</strong> &mdash; flags documentation and rules that no longer match the running code.</li>
-              <li><strong>Decision capture</strong> &mdash; distills operator gate decisions into reusable institutional memory.</li>
+              <li><strong>Orchestrator</strong>: answers from the system&rsquo;s own data and dispatches runs only after an explicit confirmation.</li>
+              <li><strong>Audit analyst</strong>: reasons over pre-parsed audit context and proposes optimizations.</li>
+              <li><strong>Search Insights builder</strong>: turns a brief or profile into a five-sheet activation workbook.</li>
+              <li><strong>Claims QA</strong>: reconciles a JSON audience config against the CSV source-of-truth.</li>
+              <li><strong>Client-brief parser</strong>: extracts brand, codes, audiences, indicators, and KOLs from a brief.</li>
+              <li><strong>Upload classifier</strong>: resolves track, client, and audience from messy uploads on a lightweight tier.</li>
+              <li><strong>Client classifier</strong>: places each client in a seven-category taxonomy from weighted signals, pinned by golden fixtures.</li>
+              <li><strong>Agent-text QA</strong>: scores agent text against eight standards before it reaches a partner.</li>
+              <li><strong>Validation critic</strong>: reviews every maker&rsquo;s output and drives the bounded self-correction loop.</li>
+              <li><strong>Knowledge curator</strong>: prunes stale patterns, calibrates, and proposes standing-rule changes for review.</li>
+              <li><strong>Conflict detector</strong>: flags documentation and rules that no longer match the running code.</li>
+              <li><strong>Decision capture</strong>: distills operator gate decisions into reusable institutional memory.</li>
             </ul>
           </article>
           <article class="roster-col">
             <h3>Deterministic engines</h3>
             <ul>
-              <li><strong>Parse &rarr; validate &rarr; finalize</strong> &mdash; the optimization pipeline; agents think only in the middle.</li>
-              <li><strong>Quality gate</strong> &mdash; one check for cross-reader consistency and artifact completeness before a run can finish.</li>
-              <li><strong>Workbook builders</strong> &mdash; the four- and five-sheet Excel templates, reproducible byte-for-byte.</li>
-              <li><strong>Schema validators</strong> &mdash; shared typed contracts that fail loud instead of drifting.</li>
-              <li><strong>Pattern extractor</strong> &mdash; the learning sink that turns runs and corrections into reusable patterns.</li>
-              <li><strong>Analysis engine</strong> &mdash; trends, anomalies, clustering, prediction, and cross-client similarity.</li>
-              <li><strong>Dispatcher &amp; watchdog</strong> &mdash; advances stages, fans out grouped runs, and recovers hung work.</li>
-              <li><strong>Upload router</strong> &mdash; classify, dedupe by content hash, and hard-link into the canonical input tree.</li>
-              <li><strong>MCP server &amp; dashboard</strong> &mdash; typed, test-backed tools plus a separate embedded health surface.</li>
+              <li><strong>Parse &rarr; validate &rarr; finalize</strong>: the optimization pipeline; agents think only in the middle.</li>
+              <li><strong>Quality gate</strong>: one check for cross-reader consistency and artifact completeness before a run can finish.</li>
+              <li><strong>Workbook builders</strong>: the four- and five-sheet Excel templates, reproducible byte-for-byte.</li>
+              <li><strong>Schema validators</strong>: shared typed contracts that fail loud instead of drifting.</li>
+              <li><strong>Pattern extractor</strong>: the learning sink that turns runs and corrections into reusable patterns.</li>
+              <li><strong>Analysis engine</strong>: trends, anomalies, clustering, prediction, and cross-client similarity.</li>
+              <li><strong>Dispatcher &amp; watchdog</strong>: advances stages, fans out grouped runs, and recovers hung work.</li>
+              <li><strong>Upload router</strong>: classify, dedupe by content hash, and hard-link into the canonical input tree.</li>
+              <li><strong>MCP server &amp; dashboard</strong>: typed, test-backed tools plus a separate embedded health surface.</li>
             </ul>
           </article>
         </div>

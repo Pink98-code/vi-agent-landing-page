@@ -1,5 +1,5 @@
 /* =========================================================
-   Vi Data Ops — Mobile shared content builders (ViContent)
+   Vi Data Ops: Mobile shared content builders (ViContent)
    Repeated card decks + the three architecture renderers
    (accordion / swipe / step-through) + showcase builders.
    All driven by ViMobile data so markup stays lean.
@@ -20,7 +20,7 @@
     ["Typed API surface", "Fastify routes now use Zod validation, generated OpenAPI, canonical shared enums, and event-kind guards to reduce UI/backend drift."],
     ["Cleaner operating system", "Dormant tools and Confluence infrastructure were removed, duplicate client folders merged, and operator-facing upload paths documented as first-class."],
     ["Multi-user access", "Username/password login replaced the single shared token: scrypt-hashed credentials, session tokens, admin-managed accounts and roles, and a one-switch private mode."],
-    ["Self-correcting agents", "A validation critic reviews each maker\u2019s output before delivery and re-dispatches it with the critique when a check fails \u2014 a bounded self-correction loop."],
+    ["Self-correcting agents", "A validation critic reviews each maker\u2019s output before delivery and re-dispatches it with the critique when a check fails: a bounded self-correction loop."],
     ["Settings control plane", "Settings exposes the live model tier, auth source, effective model map, backend health probe, SSE state, LAN sharing URL, output paths, and hidden-client recovery."],
     ["Admin user controls", "The Users surface manages account creation, roles, password resets, enable/disable, deletion guards, and the shared/private workspace switch."],
   ];

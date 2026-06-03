@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Vi Data Ops — Mobile · B · App-Native</title>
+  <title>Vi Data Ops: Mobile · B · App-Native</title>
   <link rel="icon" type="image/png" href="assets/vi-logo-black.png" />
   <link rel="stylesheet" href="mobile/base.css" />
   <style>
-    /* ============ Variant B — App-Native / Bottom bar / Thin display ============ */
+    /* ============ Variant B: App-Native / Bottom bar / Thin display ============ */
     body { --pad: 22px; padding-bottom: calc(98px + env(safe-area-inset-bottom)); }
 
     /* Slim translucent top bar */
@@ -45,21 +45,21 @@
     .fnav .fcta { width: auto; padding: 0 18px; height: 46px; border-radius: 999px; background: var(--violet); color: #fff; font-weight: 700; font-size: 13px; display: inline-flex; align-items: center; transition: background 200ms ease; }
     .fnav .fcta:hover, .fnav .fcta:active { background: var(--vi-violet-800, #351fa3); }
 
-    /* Hero — thin couture display (design-system signature) */
+    /* Hero: thin couture display (design-system signature) */
     .hero { padding-top: calc(40px + env(safe-area-inset-top)); padding-bottom: 64px; }
     .hero h1 { font-size: clamp(52px, 17vw, 80px); line-height: 0.92; letter-spacing: -0.035em; font-weight: 200; }
     .hero h1 b { font-weight: 500; }
     .hero-lede { font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.8); }
     .hero-eyebrow { font-weight: 500; }
 
-    /* Section heads — thin display */
+    /* Section heads: thin display */
     .section { padding-top: clamp(64px, 16vw, 92px); padding-bottom: clamp(64px, 16vw, 92px); }
     .section-head h2 { font-weight: 200; letter-spacing: -0.03em; font-size: clamp(34px, 10vw, 46px); line-height: 1.0; }
     .section-head h2 b, .investor h2 { font-weight: 500; }
     .investor h2 { font-weight: 200; }
     .briefing-panel h3, .track-card h3, .flow-step h3, .release-card h3, .control-card h3 { font-weight: 600; }
 
-    /* Architecture — horizontal swipe panels + bottom sheet */
+    /* Architecture: horizontal swipe panels + bottom sheet */
     .arch { background: #eef8fb; }
     /* live trace header */
     .arch-trace { margin-bottom: 18px; }
@@ -124,7 +124,7 @@
     .sheet-chips .c { font-size: 11px; font-weight: 700; padding: 5px 9px; border-radius: 7px; background: var(--aqua-soft); color: var(--ink); }
     .sheet-close { position: absolute; top: 14px; right: 16px; width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line); background: #fff; font-size: 18px; color: var(--muted); }
 
-    /* Showcase — swipe carousel */
+    /* Showcase: swipe carousel */
     .sc-carousel { margin: 0 calc(var(--pad) * -1); }
     .sc-track {
       display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none;
@@ -284,29 +284,29 @@
       </div>
       <div class="roster">
         <article class="roster-col"><h3>Reasoning agents</h3><ul>
-          <li><strong>Orchestrator</strong> — answers from the system's own data and dispatches runs only after confirmation.</li>
-          <li><strong>Audit analyst</strong> — reasons over pre-parsed audit context and proposes optimizations.</li>
-          <li><strong>Search Insights builder</strong> — turns a brief or profile into a five-sheet workbook.</li>
-          <li><strong>Claims QA</strong> — reconciles a JSON audience config against the CSV source-of-truth.</li>
-          <li><strong>Client-brief parser</strong> — extracts brand, codes, audiences, indicators, and KOLs.</li>
-          <li><strong>Upload classifier</strong> — resolves track, client, and audience from messy uploads.</li>
-          <li><strong>Client classifier</strong> — places each client in a seven-category taxonomy.</li>
-          <li><strong>Agent-text QA</strong> — scores agent text against eight standards.</li>
-          <li><strong>Validation critic</strong> — drives the bounded self-correction loop.</li>
-          <li><strong>Knowledge curator</strong> — prunes patterns and proposes standing-rule changes.</li>
-          <li><strong>Conflict detector</strong> — flags docs and rules that no longer match the code.</li>
-          <li><strong>Decision capture</strong> — distills operator decisions into institutional memory.</li>
+          <li><strong>Orchestrator</strong>: answers from the system's own data and dispatches runs only after confirmation.</li>
+          <li><strong>Audit analyst</strong>: reasons over pre-parsed audit context and proposes optimizations.</li>
+          <li><strong>Search Insights builder</strong>: turns a brief or profile into a five-sheet workbook.</li>
+          <li><strong>Claims QA</strong>: reconciles a JSON audience config against the CSV source-of-truth.</li>
+          <li><strong>Client-brief parser</strong>: extracts brand, codes, audiences, indicators, and KOLs.</li>
+          <li><strong>Upload classifier</strong>: resolves track, client, and audience from messy uploads.</li>
+          <li><strong>Client classifier</strong>: places each client in a seven-category taxonomy.</li>
+          <li><strong>Agent-text QA</strong>: scores agent text against eight standards.</li>
+          <li><strong>Validation critic</strong>: drives the bounded self-correction loop.</li>
+          <li><strong>Knowledge curator</strong>: prunes patterns and proposes standing-rule changes.</li>
+          <li><strong>Conflict detector</strong>: flags docs and rules that no longer match the code.</li>
+          <li><strong>Decision capture</strong>: distills operator decisions into institutional memory.</li>
         </ul></article>
         <article class="roster-col"><h3>Deterministic engines</h3><ul>
-          <li><strong>Parse → validate → finalize</strong> — agents think only in the middle.</li>
-          <li><strong>Quality gate</strong> — one check for consistency and completeness.</li>
-          <li><strong>Workbook builders</strong> — four- and five-sheet templates, reproducible.</li>
-          <li><strong>Schema validators</strong> — shared typed contracts that fail loud.</li>
-          <li><strong>Pattern extractor</strong> — turns runs and corrections into reusable patterns.</li>
-          <li><strong>Analysis engine</strong> — trends, anomalies, clustering, prediction, similarity.</li>
-          <li><strong>Dispatcher & watchdog</strong> — advances stages, fans out runs, recovers hung work.</li>
-          <li><strong>Upload router</strong> — classify, dedupe by hash, hard-link into the input tree.</li>
-          <li><strong>MCP server & dashboard</strong> — typed, test-backed tools plus a health surface.</li>
+          <li><strong>Parse → validate → finalize</strong>: agents think only in the middle.</li>
+          <li><strong>Quality gate</strong>: one check for consistency and completeness.</li>
+          <li><strong>Workbook builders</strong>: four- and five-sheet templates, reproducible.</li>
+          <li><strong>Schema validators</strong>: shared typed contracts that fail loud.</li>
+          <li><strong>Pattern extractor</strong>: turns runs and corrections into reusable patterns.</li>
+          <li><strong>Analysis engine</strong>: trends, anomalies, clustering, prediction, similarity.</li>
+          <li><strong>Dispatcher & watchdog</strong>: advances stages, fans out runs, recovers hung work.</li>
+          <li><strong>Upload router</strong>: classify, dedupe by hash, hard-link into the input tree.</li>
+          <li><strong>MCP server & dashboard</strong>: typed, test-backed tools plus a health surface.</li>
         </ul></article>
       </div>
     </section>
